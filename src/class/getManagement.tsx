@@ -4,10 +4,10 @@ import NormalResponse from "./normalResponse";
 export default class GetManagement extends NormalResponse {
     data: Version = null;
 
-    display(): JSX.Element {
+    display(isFirst: boolean): JSX.Element {
         return (
             <>
-            <strong>{ this.data !== null ? <strong>{ this.data.version }</strong> : <span>No data</span> }</strong>
+            { isFirst ? <span>No data</span> : this.displayNormal() }
             </>
         )
     }
@@ -17,5 +17,15 @@ export default class GetManagement extends NormalResponse {
         this.status = status;
         this.url = url;
         this.data = data;
+    }
+
+    displayNormal(): JSX.Element {
+        return (
+            <ul>
+            <li>Status: {this.status}</li>
+            <li>Url: {this.url}</li>
+            <li>Name: {this.data.version}</li>
+        </ul>
+        )
     }
 }

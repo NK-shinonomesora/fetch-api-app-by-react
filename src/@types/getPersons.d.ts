@@ -1,3 +1,3 @@
-interface GetPersons extends NormalResponseI {
+interface GetPersonsI extends NormalResponseI {
     data: Person[]
 }

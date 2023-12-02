@@ -1,6 +1,7 @@
 import NormalResponse from "./normalResponse";
 
 export default abstract class MyFetch {
+  isFirst = true;
   method: string
   url: string
 
@@ -9,6 +10,6 @@ export default abstract class MyFetch {
     this.url = url;
   }
 
-  abstract myFetch(name?: string): Promise<Response>;
+  abstract myFetch(input?: string | Person): Promise<Response>;
   abstract myJson(res: Response, data: NormalResponse[]): Promise<NormalResponse[]>;
 }
