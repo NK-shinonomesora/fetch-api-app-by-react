@@ -5,11 +5,26 @@ import MyFetch from "../class/myFetch";
 import GetPersonsNameFetch from "../class/getPersonsNameFetch";
 import GetManagementFetch from "../class/getManagementFetch";
 import GetManagement from "../class/getManagement";
+import GetPersons from "../class/getPersons";
+import GetPersonsFetch from "../class/getPersonsFetch";
+import PostPersons from "../class/postPersons";
+import PostPersonsFetch from "../class/postPersonsFetch";
+import PutPersons from "../class/putPersons";
+import PutPersonsFetch from "../class/putPersonsFetch";
+import DeletePersons from "../class/deletePersons";
+import DeletePersonsFetch from "../class/deletePersonsFetch";
+import ResetPersons from "../class/resetPersons";
+import ResetPersonsFetch from "../class/resetPersonsFetch";
 
 const factoryData = () => {
     const data: NormalResponse[] = [
         new GetPersonsName(),
-        new GetManagement()
+        new GetManagement(),
+        new GetPersons(),
+        new PostPersons(),
+        new PutPersons(),
+        new DeletePersons(),
+        new ResetPersons()
     ];
     return data;
 }
@@ -17,50 +32,24 @@ const factoryData = () => {
 const factoryMyFetch = () => {
     const myFetches: MyFetch[] = [
         new GetPersonsNameFetch("GET", "https://umayadia-apisample.azurewebsites.net/api/persons"),
-        new GetManagementFetch("GET", "https://umayadia-apisample.azurewebsites.net/api/management")
+        new GetManagementFetch("GET", "https://umayadia-apisample.azurewebsites.net/api/management"),
+        new GetPersonsFetch("GET", "https://umayadia-apisample.azurewebsites.net/api/persons"),
+        new PostPersonsFetch("POST", "https://umayadia-apisample.azurewebsites.net/api/persons"),
+        new PutPersonsFetch("PUT", "https://umayadia-apisample.azurewebsites.net/api/persons"),
+        new DeletePersonsFetch("DELETE", "https://umayadia-apisample.azurewebsites.net/api/persons"),
+        new ResetPersonsFetch("DELETE", "https://umayadia-apisample.azurewebsites.net/api/persons/all/reset")
     ];
     return myFetches;
 }
 
 const Fetch = () => {
     const [data, setData] = useState<NormalResponse[]>(factoryData());
-    const [myFetch, setMyFetch] = useState<MyFetch[]>(factoryMyFetch());
+    const [myFetch] = useState<MyFetch[]>(factoryMyFetch());
    
-    const fetchAPI = async (mf: MyFetch, name?: string) => {
-        const res = await mf.myFetch(name);
+    const fetchAPI = async (mf: MyFetch, input?: string | Person) => {
+        const res = await mf.myFetch(input);
         const newData = await mf.myJson(res, data);
         setData(newData);
-    }
-
-    const getData = async () => {
-        // POST用
-        //const person: Person = { name: "user", note: "test", age: 20, registerDate: "1917-05-29T15:18:49" }; // registerDateは右のような形式である必要がある模様
-        // const data = await fetch("https://umayadia-apisample.azurewebsites.net/api/persons", { 
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(person)
-        // });
-        // PUT用
-        // const person2: Person = { name: "user3", note: "test3", age: 303, registerDate: "2003-05-29T15:18:49" };
-        // const data = await fetch("https://umayadia-apisample.azurewebsites.net/api/persons/user2", { 
-        //     method: "PUT",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(person2)
-        // });
-        // DELETE用
-        //const data = await fetch("https://umayadia-apisample.azurewebsites.net/api/persons/user3", { method: "DELETE" });
-        // ALL DELETE用
-        //const data = await fetch("https://umayadia-apisample.azurewebsites.net/api/persons/all/reset", { method: "DELETE" });
-        // OPTIONS用
-        // const data = await fetch("https://umayadia-apisample.azurewebsites.net/api/persons", { method: "OPTIONS" });
-        // const status: StatusCode = { status: data.status, url: data.url };
-        // const data2: Options = await data.json();
-        // setData(data2);
-        // setStatus(status);
     }
 
     return { data, myFetch, fetchAPI }

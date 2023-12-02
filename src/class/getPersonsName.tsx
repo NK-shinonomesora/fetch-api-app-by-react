@@ -4,10 +4,10 @@ import NormalResponse from "./normalResponse";
 export default class GetPersonsName extends NormalResponse {
     data: Person = null;
 
-    display(): JSX.Element {
+    display(isFirst: boolean): JSX.Element {
         return (
             <>
-            <p>{ this.data !== null ? <strong>{ this.data.name }</strong> : <span>No data</span> }</p>
+            { isFirst ? <span>No data</span> : this.data === null ? this.displayNull() : this.displayNormal() }
             </>
         )
     }
@@ -17,5 +17,28 @@ export default class GetPersonsName extends NormalResponse {
         this.status = status;
         this.url = url;
         this.data = data;
+    }
+
+    displayNormal(): JSX.Element {
+        return (
+            <ul>
+                <li>Status: {this.status}</li>
+                <li>Url: {this.url}</li>
+                <li>Name: {this.data.name}</li>
+                <li>Note: {this.data.note}</li>
+                <li>Age: {this.data.age}</li>
+                <li>registerDate: {this.data.registerDate}</li>
+            </ul>
+        )
+    }
+
+    displayNull(): JSX.Element {
+        return (
+            <ul>
+                <li>Status: {this.status}</li>
+                <li>Url: {this.url}</li>
+                <li>Data: null</li>
+            </ul>
+        )
     }
 }
