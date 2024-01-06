@@ -14,9 +14,11 @@ gh repo clone NK-shinonomesora/fetch-api-app-by-react
 
 ### Building this app
 Running the command below in order builds this app.  
-```cd <sample_dir>```  
-```npm ci```  
-```npm run build```  
+```
+cd <sample_dir>
+npm ci
+npm run build
+```  
 
 ### Running this app
 Open <sample_dir>/dist/index.html in browser.
