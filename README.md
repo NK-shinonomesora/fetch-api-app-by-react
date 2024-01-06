@@ -8,7 +8,9 @@ Download and install Node.js.
 
 ### Getting this app
 Using the command below clones this repository.  
-```gh repo clone NK-shinonomesora/fetch-api-app-by-react```
+```
+gh repo clone NK-shinonomesora/fetch-api-app-by-react
+```
 
 ### Building this app
 Running the command below in order builds this app.  
